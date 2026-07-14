@@ -29,5 +29,3 @@ The workflow runs every day at 10:00 AM and performs the following tasks:
 
 This project was created to practice workflow automation, API integration, and AI-powered automation using n8n.
 ## Workflow
-
-![Workflow](images/workflow.png)  

@@ -1,0 +1,188 @@
+{
+  "name": "Geralçao De Frases Motivacionais",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        -16
+      ],
+      "id": "c5a973d3-af46-47d8-a2f8-3756f1e81ae1",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://zenquotes.io/api/random/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        16,
+        -16
+      ],
+      "id": "bd7d3bc7-8dc5-446a-b1e9-ff4e5007485d",
+      "name": "Busca Frase Motivacional"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.mymemory.translated.net/get?q={{ $json.q }}&langpair=en|pt-BR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        272,
+        -16
+      ],
+      "id": "79695a08-d860-4f24-99f4-3e80cc6fb9d0",
+      "name": "Traduz Frases"
+    },
+    {
+      "parameters": {
+        "sendTo": "vicpacheco566@gmail.com",
+        "subject": "Frase Motivacional do Dia",
+        "message": "=A frase motivacional do dia é \"{{ $json.responseData.translatedText }}\"\n\nAutor:{{ $('Busca Frase Motivacional').item.json.a }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        -16
+      ],
+      "id": "179c985b-3496-4992-8212-77916942070a",
+      "name": "Envia Frases No Email",
+      "webhookId": "6a8bcba5-b6d5-4e48-be0e-fe0e0b1a2373",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VHop6Wk8ZnCmvOWV",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Trigger Para Dispara a Automação\n- Dispara a Automação Todo dia 10AM",
+        "height": 320,
+        "width": 272
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        -144
+      ],
+      "id": "c0be3c38-3c2e-4148-8a1b-3f3df19d22a2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Requisiçao pra buscar as frases motivacionais\n",
+        "height": 320,
+        "width": 272,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -144
+      ],
+      "id": "0dc24f0d-8cff-405c-b3a2-41b5ef35056a",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Requisiçao para Traduzir as Frases do ingles para portugues\n",
+        "height": 320,
+        "width": 272,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        -144
+      ],
+      "id": "f8a24621-6e03-4945-b274-08646ebdf3dd",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Envio da Frase Mot, no E-Mail\n",
+        "height": 320,
+        "width": 272,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        464,
+        -144
+      ],
+      "id": "eec94ee0-0a31-4496-b7ba-1d11ac8ff0ca",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Busca Frase Motivacional",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Busca Frase Motivacional": {
+      "main": [
+        [
+          {
+            "node": "Traduz Frases",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Traduz Frases": {
+      "main": [
+        [
+          {
+            "node": "Envia Frases No Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "4f3c3835-3cb8-4c34-869f-d947029cc781",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ab73e3b4c1bd2a0ed2b1d1e2e82aebc92bc35eca0f7396b5c6341f4c50eb29fa"
+  },
+  "nodeGroups": [],
+  "id": "VZqxop7bDakKYT0x",
+  "tags": []
+}

@@ -31,3 +31,8 @@ This project was created to practice workflow automation, API integration, and A
 ## Workflow
 
 ![Workflow](workflow.png)
+
+![n8n](https://img.shields.io/badge/n8n-Automation-orange)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Status](https://img.shields.io/badge/status-Completed-blue)
+
